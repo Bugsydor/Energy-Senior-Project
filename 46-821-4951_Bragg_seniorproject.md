@@ -33,6 +33,8 @@ In addition to the standard project deliverables, I will need:
 
 * To correct for unreliable input data
 
+* Respond to the contest by June 11
+
 ## Faculty Request
 
 I am already working with Brother Brett Amidan on this project.
