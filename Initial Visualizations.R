@@ -53,13 +53,38 @@ case_01_bus_vol_ang %>%
 
 
 
+# Plot some angles now.
+case_01_lin_cur_ang %>% 
+  ggplot(aes(x = Time)) +
+  geom_line(aes(y = X8001.OLINDA......500..4001.MALIN.......500..1.), color = "skyblue") +
+  geom_line(aes(y = X3906.ROUND.MT....500..4001.MALIN.......500..1.), color = "orange") +
+  geom_line(aes(y = X8001.OLINDA......500..4001.MALIN.......500..1. - X3906.ROUND.MT....500..4001.MALIN.......500..1.)) +
+  theme_bw()
+
+
+# something a bit further away
+case_01_lin_cur_ang %>% 
+  ggplot(aes(x = Time)) +
+  #geom_line(aes(y = X8001.OLINDA......500..4001.MALIN.......500..1.), color = "skyblue") +
+  #geom_line(aes(y = X2202.MIGUEL......230..2000.MEXICO......230..1.), color = "orange") +
+  geom_line(aes(y = X8001.OLINDA......500..4001.MALIN.......500..1. - X2202.MIGUEL......230..2000.MEXICO......230..1.)) +
+  theme_bw()
+
+# Mostly the same, but with some interesting rough spots.
+
+# Consider coding a loop to make a matrix of all the angle differences in buses
+
+# Read papers on spectral analysis
+## There is spectral analysis in R (Packages)
+
+
+# calculate differences, and look for largest range of results? # check for biggest amplitude overall, and 
+# biggest shift in amplitude
+
+# ?diff to look at derivatives
+
+# Consider standardizing the center-lines?
 
 
 
-
-
-
-
-
-
-
+# by next week, find some good routes forward. Good plots of the oscillation you're looking for
