@@ -7,4 +7,5 @@ knit: (function(input_file, encoding) {out_dir <- 'docs'; rmarkdown::render(inpu
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Header 1
 I'm a website.
