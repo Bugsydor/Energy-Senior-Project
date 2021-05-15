@@ -1,0 +1,16 @@
+name: "Energy Senior Project"
+output_dir: "docs"
+navbar:
+	title: "Energy Senior Project"
+	left:
+	- text: "Home"
+	href: index.html
+	- text: "First Blog Post"
+	href: Project Blog/First Blog Post (Data Ingestion)/First-Blog_Post.html
+output:
+	html_document:
+		code_folding: hide
+		toc: yes
+		toc_float: yes
+		keep_md: yes
+		theme: cerulean
