@@ -6,6 +6,6 @@ title: "Landing Page"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Header 1
+## GitHub Repo
 
-I'm a website.
+You can find my repo [here](https://github.com/Bugsydor/Energy-Senior-Project).

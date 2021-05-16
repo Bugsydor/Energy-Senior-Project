@@ -10,7 +10,7 @@ navbar:
       href: First-Blog-Post.html
 output:
   html_document:
-    theme: cerulean
+    theme: "readable"
     code_folding: hide
     toc: yes
     toc_float: yes

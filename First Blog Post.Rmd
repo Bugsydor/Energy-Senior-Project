@@ -4,6 +4,121 @@ title: "Ingesting Data"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+# load in various packages
+if (!require(pacman)) install.packages("pacman")
+p_load(tidyverse)
+p_load(DT)
 ```
 
-## Hello, World!
+# The Project
+
+Brother Amidan and I, Ben Bragg, have entered the IEEE's 2021 contest to model and predict power oscillations in the grid. I'm going to be doing the bulk of the work, but Bro. Amidan is standing by with advice and insights in case I get stuck.
+
+The IEEE and PNNL have provided us with several sets of data, in which we must locate the sources of various oscillations. The deadline to submit our findings is June 11.
+
+
+# My Work So Far
+
+## Data Ingested
+
+I've managed to feed all of the test data into R. Here are a few columns of the data from case 1 of 13:
+
+```{r show off data}
+# Read in Case 1 data
+case_01_bus_vol_ang <- read.table("2021_IEEE_NASPI_OSL_Contest_Data_Set/Case1/BusVolAng.txt", 
+                                 header = TRUE, quote = "'") %>% 
+  as_tibble()
+
+case_01_bus_vol_mag <- read.table("2021_IEEE_NASPI_OSL_Contest_Data_Set/Case1/BusVolMag.txt", 
+                                 header = TRUE, quote = "'") %>% 
+  as_tibble()
+
+case_01_lin_cur_ang <- read.table("2021_IEEE_NASPI_OSL_Contest_Data_Set/Case1/LinCurAng.txt", 
+                                 header = TRUE, quote = "'") %>% 
+  as_tibble()
+
+case_01_lin_cur_mag <- read.table("2021_IEEE_NASPI_OSL_Contest_Data_Set/Case1/LinCurMag.txt", 
+                                 header = TRUE, quote = "'") %>% 
+  as_tibble()
+
+# Now display it
+case_01_bus_vol_ang %>% 
+  select(Time:X6301.BRIDGER.....345.) %>% 
+  datatable()
+case_01_bus_vol_mag %>% 
+  select(Time:X6301.BRIDGER.....345.) %>% 
+  datatable()
+case_01_lin_cur_ang %>% 
+  select(Time:X3906.ROUND.MT....500..4001.MALIN.......500..2.) %>% 
+  datatable()
+case_01_lin_cur_mag %>% 
+  select(Time:X3906.ROUND.MT....500..4001.MALIN.......500..2.) %>% 
+  datatable()
+```
+
+
+## First Look
+
+I've run some of the data through some preliminary visualizations, and I've already found some intriguing 
+results.
+
+For starters, a simple time series on the electrical bus named "Big Eddy":
+
+```{r visualization 1}
+case_01_bus_vol_ang %>% 
+  ggplot(aes(x = Time)) +
+  geom_line(aes(y = X4009.BIG.EDDY....230.), color = 'orange') +
+  geom_line(aes(y = X4006.BIG.EDDY....500.), color = 'skyblue') +
+#  geom_line(aes(y = X4009.BIG.EDDY....230. - X4006.BIG.EDDY....500.)) +
+  theme_bw() +
+  labs(
+    title = "Big Eddy is Shaped Like Itself",
+    x = "Time (s)",
+    y = "Voltage"
+  )
+```
+
+The first two columns of data, shown here, stay exactly the same distance apart the entire time.
+
+Then there is the comparison between the Eddy and Bridger buses:
+
+```{r visualizations 2 - 3}
+case_01_bus_vol_ang %>% 
+  ggplot(aes(x = Time)) +
+  geom_line(aes(y = X6301.BRIDGER.....345.), color = 'orange') +
+  geom_line(aes(y = X4006.BIG.EDDY....500.), color = 'skyblue') +
+  theme_bw() +
+  labs(
+    title = "Eddy's and Bridger's Shapes are Roughly Similar...",
+    x = "Time (s)",
+    y = "Voltage"
+  )
+
+case_01_bus_vol_ang %>% 
+  ggplot(aes(x = Time)) +
+  geom_line(aes(y = X6301.BRIDGER.....345. - X4006.BIG.EDDY....500.)) +
+  theme_bw() +
+  labs(
+    title = "...But They are Not Identical",
+    x = "Time (s)",
+    y = "Difference in Voltage"
+  )
+```
+
+# Postscript
+
+I'm already seeing evidence of oscillations, and I have access to tools to track down their sources.
+
+I'm looking forward to learning the spectral analysis tools I'll need, as well as applying machine learning and linear regression to pinpoint oscillation starts without visually inspecting each column of data.
+
+I'm feeling optimistic at this point.
+
+
+
+
+
+
+
+
+
