@@ -4,7 +4,7 @@ pacman::p_load(tidyverse)
 # Load in just the data I want
 case_01_bus_vol_mag <- read.table("2021_IEEE_NASPI_OSL_Contest_Data_Set/Case1/BusVolMag.txt", 
                                   header = TRUE, quote = "'") %>% 
-  filter(Time > 0.10) %>% # massive jump at startup dwarfs everything else. Removing first .1s
+  filter(Time > 5.0) %>% # massive jump at startup dwarfs everything else. Removing first .1s
   as_tibble()
 
 # Make 10 charts

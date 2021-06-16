@@ -109,9 +109,14 @@ case_01_bus_vol_ang %>%
   geom_vline(xintercept = 24.2, color = "firebrick") +
   theme_bw()
 
+# Could do differences between Bridger and other places. You should have a pretty good difference
+# AT 23.5
 
+## Pick a reference angle and compare everything to it. (Or compare 500s to 500s, etc.)
 
+# focus on voltage angles for now
 
+# move a window of FFTs across the graph. Oscillation should add a new frequency
 
 
 
