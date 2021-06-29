@@ -1,2 +1,2 @@
 # Energy-Senior-Project
-Using windowed regression and machine learning to predict power grid oscillations.
+Using convolutional neural networks to predict power grid oscillations.
