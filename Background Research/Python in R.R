@@ -6,6 +6,7 @@ conda_create("r-reticulate")
 conda_install("r-reticulate", "scipy")
 conda_install("r-reticulate", "pandas")
 conda_install("r-reticulate", "scikit-learn")
+a <- conda_list()
 
 
 # it will automatically be discovered in the "r-reticulate" environment, so that one will be used.
