@@ -4,6 +4,7 @@ p_load(keras)
 p_load(reticulate)
 p_load(tidyverse)
 
+use_condaenv("r-reticulate")
 conda_install("r-reticulate", "tensorflow")
 conda_install("r-reticulate", "keras")
 
