@@ -79,10 +79,12 @@ history <- model %>%
     verbose = 2
   )
 
+# plot history
+plot(history)
 
 
-
-
+# evaluate model
+evaluate(model, cifar$test$x, cifar$test$y, verbose = 0)
 
 
 
