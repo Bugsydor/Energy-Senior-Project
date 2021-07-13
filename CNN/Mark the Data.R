@@ -6,19 +6,43 @@ p_load(tidyverse)
 case_01_bus_vol_mag <- read.table("2021_IEEE_NASPI_OSL_Contest_Data_Set/Case1/BusVolMag.txt", 
                                   header = TRUE, quote = "'") %>% 
   as_tibble() %>% 
-  filter(Time >= 20 & Time <= 40) %>% 
-  drop_na()
+  filter(Time >= 10)
 
-c1bvm_means <- case_01_bus_vol_mag %>% 
-  mutate(across(!Time, mean))
+## messing with apply() to create averages and impute NAs
 
-c1bvm_difs <- case_01_bus_vol_mag - c1bvm_means
+list_na <- colnames(case_01_bus_vol_mag)[ apply(case_01_bus_vol_mag, 2, anyNA) ]
+median_missing <- apply(case_01_bus_vol_mag[, colnames(case_01_bus_vol_mag) %in% list_na], 
+                         2,
+                         median,
+                         na.rm = TRUE)
+## replace missing values with means
+c1bvm_imputed <- case_01_bus_vol_mag %>% 
+  mutate(X7031.COLOEAST....20.0 = if_else(is.na(X7031.COLOEAST....20.0), median_missing[1], X7031.COLOEAST....20.0),
+         X6533.EMERY.......20.0 = if_else(is.na(X6533.EMERY.......20.0), median_missing[2], X6533.EMERY.......20.0),
+         X1002.FOURCORN....345. = if_else(is.na(X1002.FOURCORN....345.), median_missing[3], X1002.FOURCORN....345.),
+         X6202.GARRISON....500. = if_else(is.na(X6202.GARRISON....500.), median_missing[4], X6202.GARRISON....500.),
+         X6404.GONDER......345. = if_else(is.na(X6404.GONDER......345.), median_missing[5], X6404.GONDER......345.),
+         X2100.IMPERIAL....230. = if_else(is.na(X2100.IMPERIAL....230.), median_missing[6], X2100.IMPERIAL....230.),
+         X6101.MIDPOINT....500. = if_else(is.na(X6101.MIDPOINT....500.), median_missing[7], X6101.MIDPOINT....500.),
+         X4201.NORTH.......500. = if_else(is.na(X4201.NORTH.......500.), median_missing[8], X4201.NORTH.......500.),
+         X3906.ROUND.MT....500. = if_else(is.na(X3906.ROUND.MT....500.), median_missing[9], X3906.ROUND.MT....500.),
+         X6403.VALMY.......345. = if_else(is.na(X6403.VALMY.......345.), median_missing[10], X6403.VALMY.......345.))
 
-c1bvm_long <- case_01_bus_vol_mag %>% 
+
+
+
+c1bvm_medians <- c1bvm_imputed %>% 
+  mutate(across(!Time, median))
+
+c1bvm_sds <- c1bvm_imputed %>% 
+  mutate(across(!Time, sd))
+
+c1bvm_norm <- (c1bvm_imputed - c1bvm_medians) / c1bvm_sds
+
+c1bvm_long <- c1bvm_imputed %>% 
   select(Time) %>% 
-  bind_cols(select(c1bvm_difs, -Time)) %>% 
-  pivot_longer(-Time, names_to = "Bus") %>% 
-  drop_na() # 115,248 entries
+  bind_cols(select(c1bvm_norm, -Time)) %>% 
+  pivot_longer(-Time, names_to = "Bus") # 139,258 entries
 
 c1bvm_long %>% 
   ggplot(aes(x = Time, y = value, group = Bus)) +
@@ -30,7 +54,7 @@ c1bvm_long %>%
 
 # shorten to 25-40s
 
-c1bvm_wide <- case_01_bus_vol_mag %>% 
+c1bvm_wide <- c1bvm_imputed %>% 
   select(Time) %>% 
   bind_cols(select(c1bvm_difs, -Time))
 

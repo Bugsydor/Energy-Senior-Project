@@ -131,6 +131,68 @@ frampt <- splitter(column = raw_seq, n_steps = n_steps)
 # Besides, this was probably getting into the weeds. I can do similar stuff using 
 # mutates and such.
 
+#### Conv1d Boston Houses Regression ####
+
+# https://www.youtube.com/watch?v=JzoIHdkFcQU
+
+# split data into train and test (by column)
+
+# normalize data by taking the median and standard deviation
+## train_data <- (train_data - median) / std
+## test_data <- (test_data - median) / std
+
+# Reshape data sets
+
+## Desired Shape: [batch_size, time_steps, input_dimension]
+
+## Current Shape: [batch_size, features]
+
+## (Batch Size = Number of Samples)
+
+## Convert 2D data to 3D via reshape
+
+### sample_size <- train_data.shape[0] # number of samples in train set
+### time_steps <- train_data.shape[1] # number of features in set
+### input_dimension = 1 # each feature is represented by 1 number
+
+### train_data_reshaped = train_data.reshape(sample_size, time_steps, input_dimension)
+
+#### looks like each feature in the Boston House Prices set is the price at a given time
+
+#### So my shape would be c(batch_size = n_buses, time_steps = n_rows, input_dimension = 1)
+
+# probably use filters = 1, activation = 'relu'. Kernel size will take some intuition.
+
+
+# c(batch_size = 58, time_steps = 2401, input_dimension = 1)
+
+# Let's try the following layer structure:
+
+model_alpha <- keras_model_sequential(name = "c1bvm_conv") %>% 
+  layer_conv_1d(input_shape = c(2401, 1), filters = 64, kernel_size = 90, activation = 'relu',
+                name = 'Conv1') %>% # 90 steps = 3s
+  layer_max_pooling_1d(pool_size = 3, name = 'Pool1') %>% 
+  layer_conv_1d(filters = 32, kernel_size = 30, activation = 'relu', name = 'Conv2') %>% 
+  layer_max_pooling_1d(pool_size = 2, name = 'Pool2') %>% 
+  layer_conv_1d(filters = 16, kernel_size = 15, activation = 'relu', name = 'Conv3') %>% 
+  layer_max_pooling_1d(pool_size = 5, name = 'Pool3') %>% 
+  layer_dropout(rate = 0.10) %>% 
+  layer_flatten() %>%
+  layer_dense(units = 32, activation = 'relu', name = 'Dense1') %>% 
+  layer_dense(units = 1, name = 'DenseOut')
+
+summary(model_alpha)
+
+# Compile
+model_alpha %>% 
+  compile(
+    optimizer = "adam",
+    loss = 'mse',
+    metrics = "mse"
+  )
+
+
+
 
 
 
