@@ -56,7 +56,11 @@ c1bvm_long %>%
 
 c1bvm_wide <- c1bvm_imputed %>% 
   select(Time) %>% 
-  bind_cols(select(c1bvm_difs, -Time))
+  bind_cols(select(c1bvm_norm, -Time))
+
+# write to csv
+c1bvm_wide %>% 
+  write_csv("CNN/c1bvm_prepped.csv")
 
 ## 1
 c1bvm_wide %>% # 35.00
@@ -410,9 +414,14 @@ c1bvm_wide %>% # 30.63
 # rather than categorize each moment as oscillating or not?
 
 
-
-
-
-
+#### Make and Write Labels CSV ####
+c1bvm_labels <- tibble(target = c(35.00, 35.00, 33.75, 33.75, 37.50, 35.63, 35.00, 33.13, 31.25, 31.50, 32.50, 32.50,
+                  31.88, 31.88, 31.25, 33.13, 30.63, 32.50, 33.75, 31.25, 31.25, 35.00, 31.88, 32.50,
+                  31.88, 31.88, 31.25, 31.25, 31.88, 31.88, 33.13, 31.88, 33.13, 30.63, 32.50, 32.50,
+                  32.50, 31.88, 30.63, 30.63, 32.50, 33.13, 30.00, 30.00, 33.13, 33.13, 33.75, 30.63,
+                  31.25, 30.63, 31.88, 33.13, 33.13, 33.75, 33.75, 33.75, 31.88, 30.63)) 
+  
+c1bvm_labels %>% 
+  write_csv("CNN/c1bvm_labels.csv")
 
 

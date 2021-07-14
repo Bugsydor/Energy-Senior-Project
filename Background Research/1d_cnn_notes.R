@@ -162,7 +162,7 @@ frampt <- splitter(column = raw_seq, n_steps = n_steps)
 #### So my shape would be c(batch_size = n_buses, time_steps = n_rows, input_dimension = 1)
 
 # probably use filters = 1, activation = 'relu'. Kernel size will take some intuition.
-
+?array_reshape
 
 # c(batch_size = 58, time_steps = 2401, input_dimension = 1)
 
@@ -192,7 +192,10 @@ model_alpha %>%
   )
 
 
+#### Epiphanies ####
 
+# I don't need to put the labels in the same data structure as the rest of the data.
+# They can be in their own vector! Just need to preserve the correct order.
 
 
 
