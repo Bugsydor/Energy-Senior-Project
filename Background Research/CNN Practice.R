@@ -5,8 +5,10 @@ p_load(reticulate)
 p_load(tidyverse)
 
 # installs the necessary python bits to use TensorFlow
-install_tensorflow()
-install_keras()
+#install_tensorflow(gpu = TRUE)
+#install_keras(tensorflow = 'gpu')
+
+tensorflow::tf_gpu_configured()
 
 # Download and prep CIFAR10 dataset
 
