@@ -22,7 +22,10 @@ c1bva_long <- case_01_bus_vol_ang %>%
 c1bva_long %>% 
   ggplot(aes(x = Time, y = value, group = Bus)) +
   geom_line() +
-  theme_bw()
+  theme_bw() +
+  labs(
+    title = "Bus Voltage Angle"
+    )
 ggsave("Data Exploration/c1bva_all.png", width = 2500, units = "px")
 
 # c1bvm
@@ -46,7 +49,10 @@ c1bvm_long <- case_01_bus_vol_mag %>%
 c1bvm_long %>% 
   ggplot(aes(x = Time, y = value, group = Bus)) +
   geom_line() +
-  theme_bw()
+  theme_bw() +
+  labs(
+    title = "Bus Voltage Magnitude"
+  )
 ggsave("Data Exploration/c1bvm_all.png", width = 2500, units = "px")
 
 
@@ -71,7 +77,10 @@ c1lca_long <- case_01_lin_cur_ang %>%
 c1lca_long %>% 
   ggplot(aes(x = Time, y = value, group = Bus)) +
   geom_line() +
-  theme_bw()
+  theme_bw() +
+  labs(
+    title = "Line Current Angle"
+  )
 ggsave("Data Exploration/c1lca_all.png", width = 2500, units = "px")
 
 
@@ -96,7 +105,10 @@ c1lcm_long <- case_01_lin_cur_mag %>%
 c1lcm_long %>% 
   ggplot(aes(x = Time, y = value, group = Bus)) +
   geom_line() +
-  theme_bw()
+  theme_bw() +
+  labs(
+    title = "Line Current Magnitude"
+  )
 ggsave("Data Exploration/c1lcm_all.png", width = 2500, units = "px")
 
 
