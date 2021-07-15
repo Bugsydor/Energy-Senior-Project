@@ -84,7 +84,14 @@ c1bvm_wide %>% # 33.75
 c1bvm_wide %>% # 33.75
   ggplot(aes(x = Time, y = X6301.BRIDGER.....345.)) +
   geom_line() +
-  theme_bw()
+  geom_vline(xintercept = 33.75, linetype = 'dashed', color = 'orange', size = 1.2) +
+  theme_bw() +
+  labs(
+    title = "The oscillation begins at 33.75s",
+    x = "Time (s)",
+    y = "Voltage Fluctuation (V)"
+  )
+ggsave('Data Exploration/marked_chart.png')
 
 ## 5
 c1bvm_wide %>% # 37.50
