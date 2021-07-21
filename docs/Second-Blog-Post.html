@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>The Plan</title>
+
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Energy Senior Project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="First-Blog-Post.html">First Blog Post</a>
+</li>
+<li>
+  <a href="Second-Blog-Post.html">Second Blog Post</a>
+</li>
+<li>
+  <a href="Third-Blog-Post.html">Third Blog Post</a>
+</li>
+<li>
+  <a href="Final-Blog-Post.html">Final Blog Post</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">The Plan</h1>
+
+</div>
+
+
+<div id="a-change-of-plans" class="section level1">
+<h1>A Change of Plans</h1>
+<div id="the-old-plan" class="section level2">
+<h2>The Old Plan</h2>
+<p>Originally, I had planned to use spectrum analysis tools such as Fast Fourier Transforms and Waterfall charts, as well as manually windowing the data timeframes for regression analysis.</p>
+<p>This did not work out as (admittedly nebulously) planned. While I was pleased to learn a lot about a new field for me, I would require a lot more education to utilize spectral analysis in a project like this. Also, the data proved to be more complicated than my understanding of linear regressions could compensate for.</p>
+</div>
+<div id="a-new-path" class="section level2">
+<h2>A New Path</h2>
+<p>Thankfully, a new idea presented itself through my studies in machine learning: 1D Convolutional Neural Networks.</p>
+<div id="ml-machine-learning" class="section level3">
+<h3>ML (Machine Learning)</h3>
+<p>First, I would like to back up a bit and build up some concepts.</p>
+<p>Machine Learning is where you use special, trainable algorithms to make associations based on training data you give it, which associations they then apply to data from real-world situations.</p>
+<p>Typically, this is done with some pile of mathematical tricks that would be extremely tedious to do by hand, which is why he have machines do them instead.</p>
+<p>The most basic of these algorithms, the nearest-neighbors algorithm, classifies a data point as being the same as whatever the most similar points to it in your training data happened to be. Have all of the houses with five windows in them had a dog in your training data? This new five-windowed house will also have a dog.</p>
+</div>
+<div id="dnns-dense-neural-networks" class="section level3">
+<h3>DNNs (Dense Neural Networks)</h3>
+<p>DNNs are a bit more abstract and arcane. As Randall Munroe of XKCD put it in <a href="https://xkcd.com/1838/">one of his comics</a>, it’s basically a pile of linear algebra that you pour data into and it spits out numbers. And if the numbers don’t look right, you stir the pile until things look better!</p>
+<p>Basically, a DNN consists of several layers of ‘neurons’. Each neuron in a given layer is connected, to varying degrees of strength, to each neuron in the layer above it and the layer below it, and the pattern of activated neurons in one layer influences the activation of neurons in the next. The strength of these connections is represented as an array of numbers, and these numbers are what is adjusted when one, as Randall put it, stirs the pile to make the output look right.</p>
+<p>The first layer of a DNN ‘sees’ the input (such as the individual pixel brightness values in an image of a handwritten character, or one row of numeric data from a dataframe), and the pattern that evokes in the first layer cascades through any number of hidden layers until it reaches the output layer, which then spits out a result that hopefully looks more-or-less right. If it’s less right, the algorithm gives it a poor score and uses that information to adjust the connections and get a better one.</p>
+</div>
+<div id="cnns-convolutional-neural-networks" class="section level3">
+<h3>CNNs (Convolutional Neural Networks)</h3>
+<p>The major limitation of DNNs is that they have little room for nuance. They can generally only see specific patterns in an entire image or record, and have trouble recognizing similar things as being the same class.</p>
+<p>In short, they’re bad at pattern-recognition, which is what convolutional neural networks are all about.</p>
+<p>While all neurons in a dense layer are connected to each neuron above and below them, convolutional layers’ neurons are connected to each other in special ways that <strong>preserve spatial relationships</strong>. In other words, they can see local patterns. A series of such layers can string together patterns of patterns in a way that makes it far easier to identify, for example, pictures of street signs at odd angles.</p>
+<p>The most famous use of CNNs, specifically 2-dimensional CNNs (2DCNNs), is image recognition. The network is fed an array of pictures, and classifies them all based on patterns it was trained to pick out in 2D space. These images, by the way, are seen as an x-coordinate, a y-coordinate, a set of brightness values, and a number of color channels equal to 1 (monochrome) or 3 (color). This is still a pile of linear algebra, in the end, but it’s a more complicated and structured one.</p>
+</div>
+<div id="dcnns-1-dimensional-convolutional-neural-networks" class="section level3">
+<h3>1DCNNs (1-Dimensional Convolutional Neural Networks)</h3>
+<p>A 1DCNN is just like the 2D variety, but with somewhat less obvious use-cases. Rather than picking out spatial patterns in image data, where they’re fed patterns of width, depth, and intensity, 1DCNNs are often fed time-series data. One or more variables with corresponding values tracked across the lock-step-march of time.</p>
+<p>These convolutional layers pick out patterns in time, and apply labels or guess numbers based on that. And I happen to be looking for a pattern in time-series data: The start of an oscillation in the power grid.</p>
+</div>
+</div>
+<div id="the-new-plan" class="section level2">
+<h2>The New Plan</h2>
+<p>Now that I have a clear path forward, the plan is straightforward.</p>
+<ol style="list-style-type: decimal">
+<li><p>Reshape the data to fit in a 1DCNN, and split the first case data into train and test sets.</p></li>
+<li><p>Create a basic 1DCNN with arbitrary hyperparameters (i.e. default-ish settings), and run the train/test data through it.</p></li>
+<li><p>Use KerasTuneR to tune the hyperparameters and make a better model.</p></li>
+<li><p>Use the tuned model to make predictions for when each bus started to oscillate.</p></li>
+<li><p>Pick out which bus started oscillating first out of each case. That is my answer set for where each oscillation originated.</p></li>
+</ol>
+</div>
+</div>
+<div id="the-relevant-data" class="section level1">
+<h1>The Relevant Data</h1>
+<p>By the way, the bus voltage angle data looked the most useful.</p>
+<div class="figure">
+<img src="Data%20Exploration/c1bvm_all.png" alt="" />
+<p class="caption">Notice the obvious jump in activity around 30 seconds</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -8,6 +8,12 @@ navbar:
       href: index.html
     - text: "First Blog Post"
       href: First-Blog-Post.html
+    - text: "Second Blog Post"
+      href: Second-Blog-Post.html
+    - text: "Third Blog Post"
+      href: Third-Blog-Post.html
+    - text: "Final Blog Post"
+      href: Final-Blog-Post.html
 output:
   html_document:
     theme: "readable"
